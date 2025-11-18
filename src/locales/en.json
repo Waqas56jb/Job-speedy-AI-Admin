@@ -1,0 +1,104 @@
+{
+  "common": {
+    "logout": "Logout",
+    "admin": "Admin",
+    "language": "Language"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "candidates": "Candidates",
+    "jobs": "Jobs",
+    "aiTools": "AI Tools",
+    "clients": "Clients"
+  },
+  "login": {
+    "title": "Login to Your Account",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "quote": "AI DOESN'T JUST FIND JOBS IT FINDS THE RIGHT ONES FOR YOU."
+  },
+  "register": {
+    "title": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "agreeTerms": "I agree to the Terms & Conditions",
+    "register": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "quote": "AI DOESN'T JUST FIND JOBS IT FINDS THE RIGHT ONES FOR YOU."
+  },
+  "dashboard": {
+    "title": "Dashboard Overview",
+    "totalCandidates": "Total Candidates",
+    "totalJobs": "Total Jobs",
+    "activeClients": "Active Clients",
+    "totalApplications": "Total Applications",
+    "applicationsTrend": "Applications Trend",
+    "overallDistribution": "Overall Distribution"
+  },
+  "candidates": {
+    "title": "Candidate Management",
+    "candidatesCount": "Candidates",
+    "searchPlaceholder": "Search by name, email...",
+    "search": "Search",
+    "clear": "Clear",
+    "name": "Name",
+    "email": "Email",
+    "applications": "Applications",
+    "joinedDate": "Joined Date",
+    "actions": "Actions",
+    "view": "View",
+    "delete": "Delete",
+    "noCandidates": "No candidates found",
+    "deleteConfirm": "Are you sure you want to delete this candidate? This will also delete all their applications."
+  },
+  "jobs": {
+    "title": "Job Management",
+    "createJob": "Create Job",
+    "publish": "Publish",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noJobs": "No jobs found",
+    "deleteConfirm": "Delete this job?",
+    "publishModalTitle": "Publish Job via XML Feed",
+    "selectPortal": "Select Job Portal:",
+    "downloadXml": "Download XML Feed",
+    "cancel": "Cancel"
+  },
+  "aiTools": {
+    "title": "AI Tools",
+    "jobGenerator": "AI Job Post Generator",
+    "jobGeneratorDesc": "Enter a brief description and let AI generate a complete, professional job posting",
+    "generateJobPost": "Generate Job Post",
+    "generating": "Generating...",
+    "matchCandidates": "Match Candidates to Job",
+    "matchCandidatesDesc": "Select a job and find the best-matched candidates from your database.",
+    "selectJob": "Select Job",
+    "showTopCandidates": "Show Top Candidates",
+    "searching": "Searching...",
+    "extractSkills": "Extract Skills & Data from Resume",
+    "extractSkillsDesc": "Upload a PDF file here to extract all relevant data (skills, experience, contact, etc.) from a CV.",
+    "extractData": "Extract Data",
+    "extracting": "Extracting...",
+    "downloadSkills": "Download skills.txt",
+    "refresh": "Refresh"
+  },
+  "clients": {
+    "title": "Client Management",
+    "addClient": "Add Client",
+    "search": "Search",
+    "company": "Company",
+    "contactPerson": "Contact Person",
+    "email": "Email",
+    "totalJobs": "Total Jobs Posted",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "noClients": "No clients found"
+  }
+}
+

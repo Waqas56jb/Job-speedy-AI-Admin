@@ -1,0 +1,104 @@
+{
+  "common": {
+    "logout": "Abmelden",
+    "admin": "Administrator",
+    "language": "Sprache"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "candidates": "Kandidaten",
+    "jobs": "Stellenangebote",
+    "aiTools": "KI-Tools",
+    "clients": "Kunden"
+  },
+  "login": {
+    "title": "In Ihr Konto einloggen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "login": "Anmelden",
+    "dontHaveAccount": "Haben Sie kein Konto?",
+    "signUp": "Registrieren",
+    "quote": "KI FINDET NICHT NUR JOBS, SONDERN FINDET DIE RICHTIGEN FÜR SIE."
+  },
+  "register": {
+    "title": "Konto erstellen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "agreeTerms": "Ich stimme den Allgemeinen Geschäftsbedingungen zu",
+    "register": "Registrieren",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "login": "Anmelden",
+    "quote": "KI FINDET NICHT NUR JOBS, SONDERN FINDET DIE RICHTIGEN FÜR SIE."
+  },
+  "dashboard": {
+    "title": "Dashboard-Übersicht",
+    "totalCandidates": "Gesamte Kandidaten",
+    "totalJobs": "Gesamte Stellenangebote",
+    "activeClients": "Aktive Kunden",
+    "totalApplications": "Gesamte Bewerbungen",
+    "applicationsTrend": "Bewerbungstrend",
+    "overallDistribution": "Gesamtverteilung"
+  },
+  "candidates": {
+    "title": "Kandidatenverwaltung",
+    "candidatesCount": "Kandidaten",
+    "searchPlaceholder": "Nach Name, E-Mail suchen...",
+    "search": "Suchen",
+    "clear": "Löschen",
+    "name": "Name",
+    "email": "E-Mail",
+    "applications": "Bewerbungen",
+    "joinedDate": "Beitrittsdatum",
+    "actions": "Aktionen",
+    "view": "Ansehen",
+    "delete": "Löschen",
+    "noCandidates": "Keine Kandidaten gefunden",
+    "deleteConfirm": "Möchten Sie diesen Kandidaten wirklich löschen? Dies löscht auch alle seine Bewerbungen."
+  },
+  "jobs": {
+    "title": "Stellenverwaltung",
+    "createJob": "Stelle erstellen",
+    "publish": "Veröffentlichen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "noJobs": "Keine Stellenangebote gefunden",
+    "deleteConfirm": "Diese Stelle löschen?",
+    "publishModalTitle": "Stelle über XML-Feed veröffentlichen",
+    "selectPortal": "Job-Portal auswählen:",
+    "downloadXml": "XML-Feed herunterladen",
+    "cancel": "Abbrechen"
+  },
+  "aiTools": {
+    "title": "KI-Tools",
+    "jobGenerator": "KI-Stellenanzeigen-Generator",
+    "jobGeneratorDesc": "Geben Sie eine kurze Beschreibung ein und lassen Sie die KI eine vollständige, professionelle Stellenanzeige erstellen",
+    "generateJobPost": "Stellenanzeige generieren",
+    "generating": "Wird generiert...",
+    "matchCandidates": "Kandidaten mit Stelle abgleichen",
+    "matchCandidatesDesc": "Wählen Sie eine Stelle aus und finden Sie die am besten passenden Kandidaten aus Ihrer Datenbank.",
+    "selectJob": "Stelle auswählen",
+    "showTopCandidates": "Top-Kandidaten anzeigen",
+    "searching": "Wird gesucht...",
+    "extractSkills": "Fähigkeiten & Daten aus Lebenslauf extrahieren",
+    "extractSkillsDesc": "Laden Sie hier eine PDF-Datei hoch, um alle relevanten Daten (Fähigkeiten, Erfahrung, Kontakt usw.) aus einem Lebenslauf zu extrahieren.",
+    "extractData": "Daten extrahieren",
+    "extracting": "Wird extrahiert...",
+    "downloadSkills": "Fähigkeiten.txt herunterladen",
+    "refresh": "Aktualisieren"
+  },
+  "clients": {
+    "title": "Kundenverwaltung",
+    "addClient": "Kunde hinzufügen",
+    "search": "Suchen",
+    "company": "Unternehmen",
+    "contactPerson": "Kontaktperson",
+    "email": "E-Mail",
+    "totalJobs": "Gesamte veröffentlichte Stellen",
+    "actions": "Aktionen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "view": "Ansehen",
+    "noClients": "Keine Kunden gefunden"
+  }
+}
+
