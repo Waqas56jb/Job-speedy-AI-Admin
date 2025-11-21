@@ -17,7 +17,7 @@ const CandidateDetailPage = () => {
 
   const fetchCandidateDetails = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/users/candidates/${id}`);
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates/${id}`);
       if (res.ok) {
         const data = await res.json();
         setCandidate(data.candidate);
@@ -41,7 +41,7 @@ const CandidateDetailPage = () => {
   };
 
   const handleViewResume = (applicationId) => {
-    const resumeUrl = `http://localhost:4000/api/users/resume/${applicationId}`;
+    const resumeUrl = `https://admin-backend-wheat.vercel.app/api/resume/${applicationId}`;
     setSelectedResumeUrl(resumeUrl);
     setShowResumeModal(true);
   };

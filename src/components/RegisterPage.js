@@ -23,7 +23,7 @@ const RegisterPage = () => {
     setLoading(true);
     try {
       const payload = { email: String(email).trim().toLowerCase(), password };
-      const res = await fetch("http://localhost:4000/api/auth/register", {
+      const res = await fetch("https://admin-backend-wheat.vercel.app/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

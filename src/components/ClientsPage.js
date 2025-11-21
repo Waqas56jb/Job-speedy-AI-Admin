@@ -16,7 +16,7 @@ const ClientsPage = () => {
 
   const fetchClients = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/clients');
+      const res = await fetch('https://admin-backend-wheat.vercel.app/api/clients');
       if (res.ok) {
         const data = await res.json();
         setClients(data.clients || []);
@@ -36,7 +36,7 @@ const ClientsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:4000/api/clients${editing ? '/' + editing.id : ''}`, {
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/clients${editing ? '/' + editing.id : ''}`, {
         method: editing ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -62,7 +62,7 @@ const ClientsPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm(language === 'de' ? 'Diesen Kunden löschen?' : 'Delete this client?')) return;
     try {
-      const res = await fetch(`http://localhost:4000/api/clients/${id}`, { method: 'DELETE' });
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/clients/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error(language === 'de' ? 'Löschen fehlgeschlagen' : 'Delete failed');
       await fetchClients();
     } catch (e) { alert(e.message); }

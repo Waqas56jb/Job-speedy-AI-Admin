@@ -23,10 +23,10 @@ const AdminDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const [candidatesRes, jobsRes, clientsRes, weeklyRes] = await Promise.all([
-        fetch("http://localhost:4000/api/users/candidates"),
-        fetch("http://localhost:4000/api/jobs"),
-        fetch("http://localhost:4000/api/clients"),
-        fetch("http://localhost:4000/api/jobs/stats/weekly"),
+        fetch("https://admin-backend-wheat.vercel.app/api/candidates"),
+        fetch("https://admin-backend-wheat.vercel.app/api/jobs"),
+        fetch("https://admin-backend-wheat.vercel.app/api/clients"),
+        fetch("https://admin-backend-wheat.vercel.app/api/jobs/stats/weekly"),
       ]);
 
       const candidatesData = await candidatesRes.json();

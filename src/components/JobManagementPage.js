@@ -32,7 +32,7 @@ const JobManagementPage = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/jobs");
+      const res = await fetch("https://admin-backend-wheat.vercel.app/api/jobs");
       if (res.ok) {
         const data = await res.json();
         setJobs(data.jobs || data || []);
@@ -61,7 +61,7 @@ const JobManagementPage = () => {
   const saveJob = async () => {
     const payload = { ...form };
     try {
-      const res = await fetch(`http://localhost:4000/api/jobs${editingJob ? '/' + editingJob.id : ''}`, {
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/jobs${editingJob ? '/' + editingJob.id : ''}`, {
         method: editingJob ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -79,7 +79,7 @@ const JobManagementPage = () => {
     if (!aiDescription.trim()) { alert(language === 'de' ? 'Bitte geben Sie eine kurze Beschreibung ein' : 'Please enter a short description'); return; }
     setAiLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/jobs/generate-ad', {
+      const res = await fetch('https://admin-backend-wheat.vercel.app/api/jobs/generate-ad', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ description: aiDescription })
@@ -95,7 +95,7 @@ const JobManagementPage = () => {
   const aiPost = async () => {
     if (!aiJob) return;
     try {
-      const res = await fetch('http://localhost:4000/api/jobs', {
+      const res = await fetch('https://admin-backend-wheat.vercel.app/api/jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(aiJob)
@@ -110,7 +110,7 @@ const JobManagementPage = () => {
   const deleteJob = async (jobId) => {
     if (!window.confirm(t(language, 'jobs.deleteConfirm'))) return;
     try {
-      const res = await fetch(`http://localhost:4000/api/jobs/${jobId}`, { method: 'DELETE' });
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/jobs/${jobId}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Delete failed');
       await fetchJobs();
     } catch (e) { alert(e.message); }
@@ -127,7 +127,7 @@ const JobManagementPage = () => {
     if (!selectedJobForPublish || !selectedPortal) return;
     
     try {
-      const res = await fetch(`http://localhost:4000/api/jobs/${selectedJobForPublish.id}/xml-feed/${selectedPortal}`);
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/jobs/${selectedJobForPublish.id}/xml-feed/${selectedPortal}`);
       if (!res.ok) {
         throw new Error('Failed to generate XML feed');
       }

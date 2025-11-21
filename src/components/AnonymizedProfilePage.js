@@ -15,7 +15,7 @@ const AnonymizedProfilePage = () => {
 
   const fetchCandidateData = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/users/candidates/${id}`);
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates/${id}`);
       if (res.ok) {
         const data = await res.json();
         const app = data.applications?.[0];
@@ -42,7 +42,7 @@ const AnonymizedProfilePage = () => {
 
   const handleDownload = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/users/candidates/${id}/anonymized-pdf`);
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates/${id}/anonymized-pdf`);
       if (!res.ok) {
         throw new Error(language === 'de' ? 'PDF konnte nicht erstellt werden' : 'Failed to generate PDF');
       }

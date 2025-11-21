@@ -22,7 +22,7 @@ const AIToolsPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/jobs");
+        const res = await fetch("https://admin-backend-wheat.vercel.app/api/jobs");
         if (res.ok) {
           const data = await res.json();
           setJobs(data.jobs || []);
@@ -40,7 +40,7 @@ const AIToolsPage = () => {
 
     setIsGenerating(true);
     try {
-      const res = await fetch("http://localhost:4000/api/jobs/generate-ad", {
+      const res = await fetch("https://admin-backend-wheat.vercel.app/api/jobs/generate-ad", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description }),
@@ -67,7 +67,7 @@ const AIToolsPage = () => {
 
     setPostStatus("posting");
     try {
-      const res = await fetch("http://localhost:4000/api/jobs", {
+      const res = await fetch("https://admin-backend-wheat.vercel.app/api/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -106,7 +106,7 @@ const AIToolsPage = () => {
     setMatching(true);
     setMatchedCandidates([]);
     try {
-      const res = await fetch(`http://localhost:4000/api/jobs/${selectedJob}/candidates`);
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/jobs/${selectedJob}/candidates`);
       if (res.ok) {
         const data = await res.json();
         setMatchedCandidates(data.candidates || []);
@@ -128,7 +128,7 @@ const AIToolsPage = () => {
     try {
       const form = new FormData();
       form.append('resume', uploadedFile);
-      const res = await fetch('http://localhost:4000/api/tools/extract-skills', {
+      const res = await fetch('https://admin-backend-wheat.vercel.app/api/tools/extract-skills', {
         method: 'POST',
         body: form,
       });

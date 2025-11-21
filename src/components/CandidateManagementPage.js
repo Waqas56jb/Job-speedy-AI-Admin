@@ -18,14 +18,14 @@ const CandidateManagementPage = () => {
   const fetchCandidates = async () => {
     try {
       // Primary endpoint
-      let res = await fetch("http://localhost:4000/api/users/candidates");
+      let res = await fetch("https://admin-backend-wheat.vercel.app/api/candidates");
       if (!res.ok) throw new Error("primary_failed");
       let data = await res.json();
       let list = Array.isArray(data.candidates) ? data.candidates : [];
 
       // Fallback: if empty, try legacy endpoint
       if (list.length === 0) {
-        const res2 = await fetch("http://localhost:4000/api/candidates");
+        const res2 = await fetch("https://admin-backend-wheat.vercel.app/api/candidates");
         if (res2.ok) {
           const data2 = await res2.json();
           // Some older endpoints may return { candidates: [...] } as well
@@ -48,7 +48,7 @@ const CandidateManagementPage = () => {
       const params = new URLSearchParams();
       if (search) params.append("search", search);
       // Primary
-      let res = await fetch(`http://localhost:4000/api/users/candidates?${params.toString()}`);
+      let res = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates?${params.toString()}`);
       let list = [];
       if (res.ok) {
         const data = await res.json();
@@ -56,7 +56,7 @@ const CandidateManagementPage = () => {
       }
       // Fallback if needed
       if (list.length === 0) {
-        const res2 = await fetch(`http://localhost:4000/api/candidates?${params.toString()}`);
+        const res2 = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates?${params.toString()}`);
         if (res2.ok) {
           const data2 = await res2.json();
           list = Array.isArray(data2.candidates) ? data2.candidates : (Array.isArray(data2) ? data2 : []);
@@ -75,7 +75,7 @@ const CandidateManagementPage = () => {
     if (!window.confirm(t(language, 'candidates.deleteConfirm'))) return;
     
     try {
-      const res = await fetch(`http://localhost:4000/api/users/candidates/${candidateId}`, {
+      const res = await fetch(`https://admin-backend-wheat.vercel.app/api/candidates/${candidateId}`, {
         method: "DELETE",
       });
       if (res.ok) {
