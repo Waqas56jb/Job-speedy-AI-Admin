@@ -13,11 +13,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* iOS Safari specific body fix */
+@supports (-webkit-touch-callout: none) {
+  body {
+    position: relative;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
 }
 
 .App {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* iOS Safari specific App fix */
+@supports (-webkit-touch-callout: none) {
+  .App {
+    min-height: -webkit-fill-available;
+  }
 }
 
 /* Remove default link and button styles */
@@ -33,4 +53,19 @@ button {
 /* Ensure no default margins on heading tags */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+}
+
+/* Root element fixes */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* iOS Safari specific root fix */
+@supports (-webkit-touch-callout: none) {
+  #root {
+    min-height: -webkit-fill-available;
+  }
 }

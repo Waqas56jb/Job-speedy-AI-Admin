@@ -10,6 +10,21 @@ const Layout = ({ children }) => {
   const { language, toggleLanguage } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   
+  // Handle window resize - close sidebar on desktop, keep state on mobile
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setSidebarOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    // Check on mount
+    handleResize();
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   const getSidebarItems = () => [
     { label: t(language, 'sidebar.dashboard'), key: "dashboard" },
     { label: t(language, 'sidebar.candidates'), key: "candidates" },
@@ -97,26 +112,27 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} data-page>
       {/* Top Section with Logo and Navbar */}
-      <div style={styles.topSection}>
+      <div style={styles.topSection} data-top-section>
         {/* Mobile Menu Button */}
         <button 
           style={styles.menuButton}
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-label="Toggle menu"
+          data-menu-button
         >
           {sidebarOpen ? '✕' : '☰'}
         </button>
         
         {/* Logo */}
-        <div style={styles.logo}>
-          <div style={styles.logoText}>JOBspeedy AI</div>
+        <div style={styles.logo} data-logo>
+          <div style={styles.logoText} data-logo-text>JOBspeedy AI</div>
         </div>
         
         {/* Top Navbar */}
-        <nav style={styles.topNavbar}>
-          <div style={styles.topRight}>
+        <nav style={styles.topNavbar} data-top-navbar>
+          <div style={styles.topRight} data-top-right>
             <button 
               style={styles.languageBtn} 
               onClick={toggleLanguage}
@@ -124,7 +140,7 @@ const Layout = ({ children }) => {
             >
               🌐 {language.toUpperCase()}
             </button>
-            <span style={styles.topBarItem}>{t(language, 'common.admin')}</span>
+            <span style={styles.topBarItem} data-top-bar-item>{t(language, 'common.admin')}</span>
             <button style={styles.logoutBtn} onClick={handleButtonClick}>
               {t(language, 'common.logout')}
             </button>
@@ -137,16 +153,20 @@ const Layout = ({ children }) => {
         <div 
           style={styles.overlay}
           onClick={() => setSidebarOpen(false)}
+          data-overlay
         />
       )}
 
       {/* Sidebar + Main */}
-      <div style={styles.contentWrapper}>
+      <div style={styles.contentWrapper} data-content-wrapper>
         {/* Sidebar */}
-        <div style={{
-          ...styles.sidebar,
-          ...(sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed)
-        }}>
+        <div 
+          style={{
+            ...styles.sidebar,
+            ...(sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed)
+          }}
+          data-sidebar
+        >
           {getSidebarItems().map((item) => {
             const routes = {
               "dashboard": "/dashboard",
@@ -190,10 +210,13 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Main Content */}
-        <div style={{
-          ...styles.main,
-          ...(sidebarOpen ? styles.mainWithSidebarOpen : {})
-        }}>
+        <div 
+          style={{
+            ...styles.main,
+            ...(sidebarOpen ? styles.mainWithSidebarOpen : {})
+          }}
+          data-main-content
+        >
           {children}
         </div>
       </div>
@@ -213,6 +236,9 @@ const styles = {
     color: "#2e236c",
     minHeight: "100vh",
     position: "relative",
+    width: "100%",
+    overflowX: "hidden",
+    boxSizing: "border-box",
   },
   topSection: {
     display: "flex",
@@ -227,7 +253,9 @@ const styles = {
     height: "80px",
   },
   menuButton: {
-    display: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     background: "transparent",
     border: "none",
     fontSize: "24px",
@@ -236,6 +264,7 @@ const styles = {
     color: "#2e236c",
     minWidth: "44px",
     minHeight: "44px",
+    WebkitTapHighlightColor: "transparent",
   },
   logo: {
     display: "flex",
@@ -311,6 +340,9 @@ const styles = {
     display: "flex", 
     marginTop: "80px",
     minHeight: "calc(100vh - 80px)",
+    width: "100%",
+    boxSizing: "border-box",
+    overflowX: "hidden",
   },
   sidebar: { 
     width: "220px", 
@@ -328,6 +360,7 @@ const styles = {
     boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
     transition: "transform 0.3s ease",
     zIndex: 999,
+    WebkitOverflowScrolling: "touch",
   },
   sidebarOpen: {
     transform: "translateX(0)",
@@ -356,6 +389,8 @@ const styles = {
     minHeight: "calc(100vh - 80px)",
     width: "100%",
     maxWidth: "100%",
+    boxSizing: "border-box",
+    WebkitOverflowScrolling: "touch",
   },
   mainWithSidebarOpen: {
     marginLeft: "0",
@@ -368,6 +403,8 @@ const styles = {
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 998,
+    width: "100%",
+    height: "calc(100vh - 80px)",
   },
   waveContainer: {
     position: "fixed",
@@ -381,67 +418,103 @@ const styles = {
   wave: { width: "100%", height: "auto", display: "block" },
 };
 
-// Media query styles
+// Media query styles - Using data attributes for better control
 const mediaQueries = `
   @media (min-width: 768px) {
-    .menuButton {
+    [data-menu-button] {
       display: none !important;
     }
-    .topBarItem {
+    [data-top-bar-item] {
       display: inline !important;
     }
-    .sidebar {
+    [data-sidebar] {
       transform: translateX(0) !important;
     }
-    .main {
+    [data-main-content] {
       margin-left: 220px !important;
+    }
+    [data-overlay] {
+      display: none !important;
     }
   }
   
   @media (max-width: 767px) {
-    .menuButton {
+    [data-menu-button] {
       display: flex !important;
       align-items: center;
       justify-content: center;
     }
-    .logo {
+    [data-logo] {
       padding: 0px 10px !important;
       min-width: auto !important;
       flex: 1 !important;
     }
-    .topNavbar {
+    [data-top-navbar] {
       padding: 15px 10px !important;
     }
-    .topRight {
+    [data-top-right] {
       gap: 8px !important;
     }
-    .main {
+    [data-main-content] {
       margin-left: 0 !important;
       padding: 15px !important;
+      width: 100% !important;
     }
-    .sidebar {
-      width: 260px !important;
+    [data-sidebar] {
+      width: 280px !important;
+      max-width: 85vw !important;
+    }
+    [data-content-wrapper] {
+      width: 100% !important;
     }
   }
   
   @media (max-width: 480px) {
-    .logoText {
+    [data-logo-text] {
       font-size: 18px !important;
     }
-    .topSection {
+    [data-top-section] {
       height: 70px !important;
     }
-    .contentWrapper {
+    [data-content-wrapper] {
       margin-top: 70px !important;
     }
-    .sidebar {
+    [data-sidebar] {
       top: 70px !important;
       height: calc(100vh - 70px) !important;
       width: 100% !important;
-      max-width: 280px !important;
+      max-width: 85vw !important;
+      padding: 20px 15px !important;
     }
-    .main {
+    [data-main-content] {
       padding: 10px !important;
+    }
+    [data-top-right] {
+      flex-wrap: wrap !important;
+    }
+  }
+  
+  @media (max-width: 375px) {
+    [data-sidebar] {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    [data-logo-text] {
+      font-size: 16px !important;
+    }
+  }
+  
+  /* iOS specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    [data-main-content],
+    [data-sidebar] {
+      -webkit-overflow-scrolling: touch;
+    }
+    [data-page] {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
   }
 `;

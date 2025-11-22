@@ -324,7 +324,12 @@ const JobManagementPage = () => {
 };
 
 const styles = {
-  container: { padding: "clamp(10px, 2vw, 20px) 0" },
+  container: { 
+    padding: "clamp(10px, 2vw, 20px) 0",
+    width: "100%",
+    boxSizing: "border-box",
+    overflowX: "hidden",
+  },
   headerRow: { 
     display: "flex", 
     justifyContent: "space-between", 
@@ -414,6 +419,9 @@ const styles = {
     padding: "0", 
     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
     WebkitOverflowScrolling: "touch",
+    width: "100%",
+    boxSizing: "border-box",
+    maxWidth: "100%",
   },
   table: { 
     width: "100%", 
@@ -528,6 +536,11 @@ const styles = {
     justifyContent: 'center', 
     zIndex: 1000,
     padding: "10px",
+    width: "100%",
+    height: "100%",
+    boxSizing: "border-box",
+    overflowY: "auto",
+    WebkitOverflowScrolling: "touch",
   },
   modalCard: { 
     background: 'white', 
@@ -538,6 +551,9 @@ const styles = {
     maxWidth: "420px",
     maxHeight: "90vh",
     overflowY: "auto",
+    boxSizing: "border-box",
+    WebkitOverflowScrolling: "touch",
+    margin: "auto",
   },
   previewCard: { marginTop: 16, border: '1px solid #e6eefb', borderRadius: 12, overflow: 'hidden' },
   previewHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fbff', padding: '12px 16px' },

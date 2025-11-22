@@ -205,9 +205,11 @@ const styles = {
   },
   widgetsContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
     gap: "clamp(10px, 2vw, 20px)",
     marginBottom: "clamp(20px, 4vw, 30px)",
+    width: "100%",
+    boxSizing: "border-box",
   },
   widget: {
     background: "linear-gradient(135deg, #cce6ff, #a2d2ff)",
@@ -219,6 +221,9 @@ const styles = {
     transition: "all 0.3s ease",
     fontWeight: "500",
     minHeight: "100px",
+    width: "100%",
+    boxSizing: "border-box",
+    WebkitTapHighlightColor: "transparent",
   },
   widgetValue: { 
     fontSize: "clamp(24px, 5vw, 32px)", 
@@ -245,6 +250,8 @@ const styles = {
     marginBottom: "clamp(15px, 3vw, 30px)",
     width: "100%",
     overflowX: "auto",
+    boxSizing: "border-box",
+    WebkitOverflowScrolling: "touch",
   },
   graphHeader: {
     display: "flex",
@@ -274,6 +281,9 @@ const styles = {
     display: "flex",
     gap: "clamp(10px, 2vw, 15px)",
     overflowX: "auto",
+    WebkitOverflowScrolling: "touch",
+    width: "100%",
+    boxSizing: "border-box",
   },
   pieRow: {
     display: "flex",
@@ -339,6 +349,9 @@ const styles = {
     padding: "20px 10px 30px 10px",
     minWidth: "0",
     overflowX: "auto",
+    WebkitOverflowScrolling: "touch",
+    width: "100%",
+    boxSizing: "border-box",
   },
   gridLines: {
     position: "absolute",
@@ -362,7 +375,9 @@ const styles = {
     alignItems: "flex-end",
     height: "100%",
     zIndex: 1,
-    minWidth: "300px",
+    minWidth: "280px",
+    width: "100%",
+    boxSizing: "border-box",
   },
   barGroup: {
     display: "flex",
