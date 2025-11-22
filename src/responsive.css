@@ -204,10 +204,30 @@ html, body {
   /* Use fixed heights for iOS to avoid viewport issues */
   [data-sidebar] {
     height: -webkit-fill-available;
+    pointer-events: auto !important;
+    z-index: 1001 !important;
   }
   
   [data-main-content] {
     min-height: -webkit-fill-available;
+  }
+  
+  /* Ensure sidebar items are fully clickable on iOS */
+  [data-sidebar] > div {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 131, 255, 0.2) !important;
+  }
+  
+  /* Prevent overlay from blocking sidebar clicks */
+  [data-overlay] {
+    pointer-events: auto !important;
+    z-index: 1000 !important;
+  }
+  
+  /* Ensure sidebar container doesn't block events */
+  [data-sidebar] * {
+    pointer-events: auto !important;
   }
 }
 
@@ -258,6 +278,53 @@ html, body {
   
   .pieChart {
     margin-bottom: 15px !important;
+  }
+  
+  /* Header button fixes for very small screens */
+  [data-top-section] {
+    overflow: hidden !important;
+  }
+  
+  [data-top-right] {
+    gap: 4px !important;
+    overflow: visible !important;
+  }
+  
+  [data-language-btn],
+  [data-logout-btn] {
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+  }
+  
+  [data-logo] {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+/* Extra small screens - further reduce button sizes */
+@media (max-width: 360px) {
+  [data-language-btn] {
+    padding: 4px 6px !important;
+    font-size: 9px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+  
+  [data-logout-btn] {
+    padding: 4px 8px !important;
+    font-size: 9px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+  
+  [data-logo-text] {
+    font-size: 12px !important;
+    max-width: 100px !important;
+  }
+  
+  [data-top-navbar] {
+    padding: 6px 4px !important;
   }
 }
 

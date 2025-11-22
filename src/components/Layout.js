@@ -137,11 +137,12 @@ const Layout = ({ children }) => {
               style={styles.languageBtn} 
               onClick={toggleLanguage}
               title={t(language, 'common.language')}
+              data-language-btn
             >
               🌐 {language.toUpperCase()}
             </button>
             <span style={styles.topBarItem} data-top-bar-item>{t(language, 'common.admin')}</span>
-            <button style={styles.logoutBtn} onClick={handleButtonClick}>
+            <button style={styles.logoutBtn} onClick={handleButtonClick} data-logout-btn>
               {t(language, 'common.logout')}
             </button>
           </div>
@@ -152,7 +153,18 @@ const Layout = ({ children }) => {
       {sidebarOpen && (
         <div 
           style={styles.overlay}
-          onClick={() => setSidebarOpen(false)}
+          onClick={(e) => {
+            // Only close if clicking on overlay, not on sidebar
+            if (e.target === e.currentTarget) {
+              setSidebarOpen(false);
+            }
+          }}
+          onTouchStart={(e) => {
+            // Prevent touch events from propagating to sidebar
+            if (e.target === e.currentTarget) {
+              e.stopPropagation();
+            }
+          }}
           data-overlay
         />
       )}
@@ -166,6 +178,14 @@ const Layout = ({ children }) => {
             ...(sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed)
           }}
           data-sidebar
+          onClick={(e) => {
+            // Prevent clicks inside sidebar from closing it
+            e.stopPropagation();
+          }}
+          onTouchStart={(e) => {
+            // Allow touch events on sidebar
+            e.stopPropagation();
+          }}
         >
           {getSidebarItems().map((item) => {
             const routes = {
@@ -180,9 +200,18 @@ const Layout = ({ children }) => {
               <div
                 key={item.key}
                 style={getSidebarItemStyle(item)}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   handleNavigate(item.key);
                   setSidebarOpen(false);
+                }}
+                onTouchStart={(e) => {
+                  // iOS touch feedback
+                  e.currentTarget.style.opacity = "0.7";
+                }}
+                onTouchEnd={(e) => {
+                  e.currentTarget.style.opacity = "1";
                 }}
                 onMouseOver={(e) => {
                   if (!isActive) {
@@ -274,10 +303,12 @@ const styles = {
     minWidth: "200px",
     height: "100%",
     flex: "0 0 auto",
+    overflow: "hidden",
+    flexShrink: 1,
   },
   logoText: {
     fontFamily: "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    fontSize: "clamp(20px, 4vw, 32px)",
+    fontSize: "clamp(16px, 3vw, 32px)",
     fontWeight: "600",
     background: "linear-gradient(135deg, #00B2FF 0%, #0083FF 100%)",
     WebkitBackgroundClip: "text",
@@ -285,6 +316,10 @@ const styles = {
     backgroundClip: "text",
     letterSpacing: "-0.5px",
     lineHeight: "1.2",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "100%",
   },
   topNavbar: {
     display: "flex",
@@ -294,12 +329,16 @@ const styles = {
     flex: 1,
     height: "100%",
     gap: "10px",
+    minWidth: 0,
+    overflow: "hidden",
   },
   topRight: { 
     display: "flex", 
     alignItems: "center", 
-    gap: "10px",
-    flexWrap: "wrap",
+    gap: "clamp(6px, 1.5vw, 10px)",
+    flexWrap: "nowrap",
+    minWidth: 0,
+    flexShrink: 1,
   },
   topBarItem: { 
     fontWeight: 500, 
@@ -312,29 +351,33 @@ const styles = {
     color: "#2e236c",
     border: "1px solid #ddd",
     borderRadius: "25px",
-    padding: "8px 12px",
+    padding: "clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px)",
     cursor: "pointer",
     transition: "all 0.15s ease",
     fontWeight: 500,
-    fontSize: "clamp(12px, 2vw, 14px)",
+    fontSize: "clamp(11px, 2vw, 14px)",
     minWidth: "44px",
     minHeight: "44px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
+    whiteSpace: "nowrap",
   },
   logoutBtn: {
     background: "#0477BF",
     color: "#fff",
     border: "none",
     borderRadius: "25px",
-    padding: "8px 16px",
+    padding: "clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 16px)",
     cursor: "pointer",
     transition: "all 0.15s ease",
-    fontSize: "clamp(12px, 2vw, 14px)",
+    fontSize: "clamp(11px, 2vw, 14px)",
     minWidth: "44px",
     minHeight: "44px",
     whiteSpace: "nowrap",
+    flexShrink: 0,
+    fontWeight: 500,
   },
   contentWrapper: { 
     display: "flex", 
@@ -359,8 +402,10 @@ const styles = {
     overflowY: "auto",
     boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
     transition: "transform 0.3s ease",
-    zIndex: 999,
+    zIndex: 1001,
     WebkitOverflowScrolling: "touch",
+    pointerEvents: "auto",
+    touchAction: "pan-y",
   },
   sidebarOpen: {
     transform: "translateX(0)",
@@ -380,6 +425,11 @@ const styles = {
     display: "flex",
     alignItems: "center",
     minHeight: "44px",
+    pointerEvents: "auto",
+    touchAction: "manipulation",
+    WebkitTapHighlightColor: "rgba(0, 131, 255, 0.2)",
+    userSelect: "none",
+    WebkitUserSelect: "none",
   },
   main: { 
     flex: 1, 
@@ -402,9 +452,11 @@ const styles = {
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 998,
+    zIndex: 1000,
     width: "100%",
     height: "calc(100vh - 80px)",
+    pointerEvents: "auto",
+    touchAction: "auto",
   },
   waveContainer: {
     position: "fixed",
@@ -448,12 +500,26 @@ const mediaQueries = `
       padding: 0px 10px !important;
       min-width: auto !important;
       flex: 1 !important;
+      max-width: calc(100% - 200px) !important;
+    }
+    [data-logo-text] {
+      font-size: clamp(14px, 3vw, 20px) !important;
     }
     [data-top-navbar] {
-      padding: 15px 10px !important;
+      padding: 10px 8px !important;
+      min-width: 0 !important;
+      flex-shrink: 1 !important;
     }
     [data-top-right] {
-      gap: 8px !important;
+      gap: 6px !important;
+      flex-wrap: nowrap !important;
+      min-width: 0 !important;
+    }
+    [data-top-right] button {
+      padding: 6px 10px !important;
+      font-size: 11px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
     }
     [data-main-content] {
       margin-left: 0 !important;
@@ -471,7 +537,13 @@ const mediaQueries = `
   
   @media (max-width: 480px) {
     [data-logo-text] {
-      font-size: 18px !important;
+      font-size: 14px !important;
+      max-width: 120px !important;
+    }
+    [data-logo] {
+      padding: 0px 8px !important;
+      min-width: auto !important;
+      max-width: calc(100% - 160px) !important;
     }
     [data-top-section] {
       height: 70px !important;
@@ -489,8 +561,24 @@ const mediaQueries = `
     [data-main-content] {
       padding: 10px !important;
     }
+    [data-top-navbar] {
+      padding: 8px 6px !important;
+    }
     [data-top-right] {
-      flex-wrap: wrap !important;
+      gap: 4px !important;
+      flex-wrap: nowrap !important;
+    }
+    [data-top-right] button {
+      padding: 5px 8px !important;
+      font-size: 10px !important;
+      min-width: 38px !important;
+      min-height: 38px !important;
+    }
+    [data-language-btn] {
+      padding: 5px 8px !important;
+    }
+    [data-logout-btn] {
+      padding: 5px 10px !important;
     }
   }
   
@@ -515,6 +603,17 @@ const mediaQueries = `
       width: 100%;
       height: 100%;
       overflow: hidden;
+    }
+    [data-sidebar] {
+      z-index: 1001 !important;
+      pointer-events: auto !important;
+    }
+    [data-overlay] {
+      z-index: 1000 !important;
+    }
+    [data-sidebar] > div {
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
     }
   }
 `;
