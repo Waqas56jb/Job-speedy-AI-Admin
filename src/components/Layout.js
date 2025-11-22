@@ -152,18 +152,7 @@ const Layout = ({ children }) => {
       {sidebarOpen && (
         <div 
           style={styles.overlay}
-          onClick={(e) => {
-            // Only close if clicking on overlay, not on sidebar
-            if (e.target === e.currentTarget) {
-              setSidebarOpen(false);
-            }
-          }}
-          onTouchStart={(e) => {
-            // Prevent touch events from propagating to sidebar
-            if (e.target === e.currentTarget) {
-              e.stopPropagation();
-            }
-          }}
+          onClick={() => setSidebarOpen(false)}
           data-overlay
         />
       )}
@@ -177,14 +166,6 @@ const Layout = ({ children }) => {
             ...(sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed)
           }}
           data-sidebar
-          onClick={(e) => {
-            // Prevent clicks inside sidebar from closing it
-            e.stopPropagation();
-          }}
-          onTouchStart={(e) => {
-            // Allow touch events on sidebar
-            e.stopPropagation();
-          }}
         >
           {getSidebarItems().map((item) => {
             const routes = {
@@ -199,18 +180,9 @@ const Layout = ({ children }) => {
               <div
                 key={item.key}
                 style={getSidebarItemStyle(item)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
+                onClick={() => {
                   handleNavigate(item.key);
                   setSidebarOpen(false);
-                }}
-                onTouchStart={(e) => {
-                  // iOS touch feedback
-                  e.currentTarget.style.opacity = "0.7";
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.style.opacity = "1";
                 }}
                 onMouseOver={(e) => {
                   if (!isActive) {
@@ -387,10 +359,8 @@ const styles = {
     overflowY: "auto",
     boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
     transition: "transform 0.3s ease",
-    zIndex: 1001,
+    zIndex: 999,
     WebkitOverflowScrolling: "touch",
-    pointerEvents: "auto",
-    touchAction: "pan-y",
   },
   sidebarOpen: {
     transform: "translateX(0)",
@@ -410,11 +380,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     minHeight: "44px",
-    pointerEvents: "auto",
-    touchAction: "manipulation",
-    WebkitTapHighlightColor: "rgba(0, 131, 255, 0.2)",
-    userSelect: "none",
-    WebkitUserSelect: "none",
   },
   main: { 
     flex: 1, 
@@ -437,11 +402,9 @@ const styles = {
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 1000,
+    zIndex: 998,
     width: "100%",
     height: "calc(100vh - 80px)",
-    pointerEvents: "auto",
-    touchAction: "auto",
   },
   waveContainer: {
     position: "fixed",
@@ -552,17 +515,6 @@ const mediaQueries = `
       width: 100%;
       height: 100%;
       overflow: hidden;
-    }
-    [data-sidebar] {
-      z-index: 1001 !important;
-      pointer-events: auto !important;
-    }
-    [data-overlay] {
-      z-index: 1000 !important;
-    }
-    [data-sidebar] > div {
-      pointer-events: auto !important;
-      touch-action: manipulation !important;
     }
   }
 `;
