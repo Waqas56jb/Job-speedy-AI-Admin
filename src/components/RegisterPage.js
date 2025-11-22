@@ -49,7 +49,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} className="register-page">
       {/* Language Switcher */}
       <button 
         style={styles.languageBtn} 
@@ -60,7 +60,7 @@ const RegisterPage = () => {
       </button>
 
       {/* Left Side */}
-      <div style={styles.leftSection}>
+      <div style={styles.leftSection} className="register-left-section">
         <div style={styles.logoText}>JOBspeedy AI</div>
         <p style={styles.quote}>
           {t(language, 'register.quote')}
@@ -68,8 +68,8 @@ const RegisterPage = () => {
       </div>
 
       {/* Right Side - Sign Up Form */}
-      <div style={styles.rightSection}>
-        <div style={styles.formBox}>
+      <div style={styles.rightSection} className="register-right-section">
+        <div style={styles.formBox} className="register-form-box">
           <h2 style={styles.formTitle}>{t(language, 'register.title')}</h2>
 
           <div style={styles.formGroup}>

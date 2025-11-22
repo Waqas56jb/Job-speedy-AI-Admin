@@ -109,7 +109,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} className="login-page">
       {/* Language Switcher */}
       <button 
         style={styles.languageBtn} 
@@ -120,7 +120,7 @@ const LoginPage = () => {
       </button>
 
       {/* Left Side */}
-      <div style={styles.leftSection}>
+      <div style={styles.leftSection} className="login-left-section">
         <div style={styles.logoText}>JOBspeedy AI</div>
         <p style={styles.quote}>
           {t(language, 'login.quote')}
@@ -128,8 +128,8 @@ const LoginPage = () => {
       </div>
 
       {/* Right Side - Login Form */}
-      <div style={styles.rightSection}>
-        <div style={styles.formBox}>
+      <div style={styles.rightSection} className="login-right-section">
+        <div style={styles.formBox} className="login-form-box">
           <h2 style={styles.formTitle}>{t(language, 'login.title')}</h2>
 
           <div style={styles.formGroup}>

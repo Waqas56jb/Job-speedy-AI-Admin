@@ -123,7 +123,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Graphs Container */}
-        <div style={styles.graphsContainer}>
+        <div style={styles.graphsContainer} className="dashboard-graphs">
           {/* Applications Trend Chart */}
           <div style={styles.graphCard}>
             <div style={styles.graphHeader}>
@@ -197,46 +197,65 @@ const AdminDashboard = () => {
 };
 
 const styles = {
-  mainHeader: { fontSize: "24px", marginBottom: "20px", fontWeight: "bold", color: "#2e236c" },
+  mainHeader: { 
+    fontSize: "clamp(18px, 4vw, 24px)", 
+    marginBottom: "clamp(15px, 3vw, 20px)", 
+    fontWeight: "bold", 
+    color: "#2e236c" 
+  },
   widgetsContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "20px",
-    marginBottom: "30px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+    gap: "clamp(10px, 2vw, 20px)",
+    marginBottom: "clamp(20px, 4vw, 30px)",
   },
   widget: {
     background: "linear-gradient(135deg, #cce6ff, #a2d2ff)",
     borderRadius: "12px",
-    padding: "25px",
+    padding: "clamp(15px, 3vw, 25px)",
     textAlign: "center",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     cursor: "pointer",
     transition: "all 0.3s ease",
     fontWeight: "500",
+    minHeight: "100px",
   },
-  widgetValue: { fontSize: "32px", fontWeight: "600", marginBottom: "5px", color: "#2e236c" },
-  widgetTitle: { fontSize: "16px", fontWeight: "500", color: "#555" },
+  widgetValue: { 
+    fontSize: "clamp(24px, 5vw, 32px)", 
+    fontWeight: "600", 
+    marginBottom: "5px", 
+    color: "#2e236c" 
+  },
+  widgetTitle: { 
+    fontSize: "clamp(12px, 2.5vw, 16px)", 
+    fontWeight: "500", 
+    color: "#555" 
+  },
   graphsContainer: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "20px",
-    marginBottom: "30px",
+    gridTemplateColumns: "1fr",
+    gap: "clamp(15px, 3vw, 20px)",
+    marginBottom: "clamp(20px, 4vw, 30px)",
   },
   graphCard: {
     background: "white",
     borderRadius: "16px",
-    padding: "30px",
+    padding: "clamp(15px, 3vw, 30px)",
     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-    marginBottom: "30px",
+    marginBottom: "clamp(15px, 3vw, 30px)",
+    width: "100%",
+    overflowX: "auto",
   },
   graphHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "25px",
+    marginBottom: "clamp(15px, 3vw, 25px)",
+    flexWrap: "wrap",
+    gap: "10px",
   },
   graphTitle: {
-    fontSize: "20px",
+    fontSize: "clamp(16px, 3vw, 20px)",
     fontWeight: "600",
     margin: 0,
     color: "#2e236c",
@@ -246,30 +265,35 @@ const styles = {
     borderRadius: "8px",
     border: "1px solid #e0e0e0",
     backgroundColor: "white",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2vw, 14px)",
     color: "#666",
     cursor: "pointer",
+    minHeight: "44px",
   },
   graphWrapper: {
     display: "flex",
-    gap: "15px",
+    gap: "clamp(10px, 2vw, 15px)",
+    overflowX: "auto",
   },
   pieRow: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "20px",
+    gap: "clamp(10px, 2vw, 20px)",
+    flexWrap: "wrap",
   },
   pieChart: {
-    width: "200px",
-    height: "200px",
+    width: "clamp(150px, 30vw, 200px)",
+    height: "clamp(150px, 30vw, 200px)",
     borderRadius: "50%",
     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    flexShrink: 0,
   },
   legend: {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
+    minWidth: "150px",
   },
   legendItem: {
     display: "flex",
@@ -281,28 +305,40 @@ const styles = {
     height: "12px",
     borderRadius: "3px",
     display: "inline-block",
+    flexShrink: 0,
   },
-  legendLabel: { fontSize: "14px", color: "#2e236c", minWidth: 110 },
-  legendValue: { fontSize: "14px", fontWeight: 600, color: "#333" },
+  legendLabel: { 
+    fontSize: "clamp(12px, 2vw, 14px)", 
+    color: "#2e236c", 
+    minWidth: "100px" 
+  },
+  legendValue: { 
+    fontSize: "clamp(12px, 2vw, 14px)", 
+    fontWeight: 600, 
+    color: "#333" 
+  },
   yAxis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "250px",
+    height: "clamp(200px, 40vw, 250px)",
     paddingTop: "20px",
     paddingBottom: "20px",
-    minWidth: "40px",
+    minWidth: "30px",
+    flexShrink: 0,
   },
   yAxisLabel: {
-    fontSize: "12px",
+    fontSize: "clamp(10px, 2vw, 12px)",
     color: "#999",
     fontWeight: "500",
   },
   graphContainer: {
     flex: 1,
     position: "relative",
-    height: "290px",
+    height: "clamp(250px, 50vw, 290px)",
     padding: "20px 10px 30px 10px",
+    minWidth: "0",
+    overflowX: "auto",
   },
   gridLines: {
     position: "absolute",
@@ -326,6 +362,7 @@ const styles = {
     alignItems: "flex-end",
     height: "100%",
     zIndex: 1,
+    minWidth: "300px",
   },
   barGroup: {
     display: "flex",
@@ -334,6 +371,7 @@ const styles = {
     flex: 1,
     gap: "5px",
     position: "relative",
+    minWidth: "40px",
   },
   labelContainer: {
     display: "flex",
@@ -344,21 +382,21 @@ const styles = {
     marginBottom: "5px",
   },
   valueBubble: {
-    fontSize: "13px",
+    fontSize: "clamp(10px, 2vw, 13px)",
     fontWeight: "600",
     color: "#2e236c",
     backgroundColor: "#e3f2fd",
     border: "1px solid #90caf9",
     borderRadius: "50%",
-    width: "36px",
-    height: "36px",
+    width: "clamp(30px, 6vw, 36px)",
+    height: "clamp(30px, 6vw, 36px)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   barContainer: {
     width: "100%",
-    height: "220px",
+    height: "clamp(180px, 35vw, 220px)",
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "center",
@@ -372,7 +410,7 @@ const styles = {
     boxShadow: "0 2px 4px rgba(106, 164, 255, 0.2)",
   },
   weekLabel: {
-    fontSize: "12px",
+    fontSize: "clamp(10px, 2vw, 12px)",
     fontWeight: "500",
     color: "#666",
     marginTop: "8px",
@@ -380,8 +418,8 @@ const styles = {
   noData: {
     textAlign: "center",
     color: "#999",
-    fontSize: "16px",
-    padding: "40px",
+    fontSize: "clamp(14px, 3vw, 16px)",
+    padding: "clamp(20px, 4vw, 40px)",
   },
 };
 

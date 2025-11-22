@@ -172,7 +172,7 @@ const JobManagementPage = () => {
 
         {showForm && !useAI && (
           <div style={styles.formCard}>
-            <div style={styles.formGrid}>
+            <div style={styles.formGrid} className="responsive-form-grid">
               <input name="title" value={form.title} onChange={handleChange} placeholder="Job Title *" style={styles.input}/>
               <input name="company" value={form.company} onChange={handleChange} placeholder="Company *" style={styles.input}/>
               <input name="location" value={form.location} onChange={handleChange} placeholder="Location" style={styles.input}/>
@@ -240,8 +240,8 @@ const JobManagementPage = () => {
         {loading ? (
           <div style={styles.loading}>{language === 'de' ? 'Stellen werden geladen...' : 'Loading jobs...'}</div>
         ) : (
-        <div style={styles.tableContainer}>
-          <table style={styles.table}>
+        <div style={styles.tableContainer} className="job-table-container">
+          <table style={styles.table} className="job-table">
             <thead>
               <tr style={styles.headerRowStrip}>
                 <th style={{...styles.th, width:'30%'}}>{language === 'de' ? 'Titel' : 'Title'}</th>
@@ -324,36 +324,221 @@ const JobManagementPage = () => {
 };
 
 const styles = {
-  container: { padding: "20px 0" },
-  headerRow: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" },
-  mainHeader: { fontSize: "28px", fontWeight: "bold", margin: 0, color: "#2e236c" },
-  primaryBtn: { padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#0477BF", color: "white", fontWeight: "600", cursor: "pointer" },
-  aiBtn: { padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#6a5acd", color: "white", fontWeight: "600", cursor: "pointer" },
-  secondaryBtn: { padding: "10px 20px", borderRadius: "8px", border: "1px solid #ddd", backgroundColor: "white", color: "#666", fontWeight: "600", cursor: "pointer" },
-  formCard: { background: "white", borderRadius: "12px", padding: "20px", marginBottom: "20px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" },
-  formGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px", marginBottom: "12px" },
-  input: { padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px" },
-  textarea: { width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", resize: "vertical" },
-  formActions: { display: "flex", gap: "10px", marginTop: "10px" },
-  tableContainer: { overflowX: "auto", background: "white", borderRadius: "12px", padding: "0", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" },
-  table: { width: "100%", borderCollapse: "separate", borderSpacing: 0 },
-  loading: { textAlign: "center", padding: "40px", color: "#666" },
-  noData: { textAlign: "center", padding: "20px", color: "#999" },
-  publishBtn: { padding: "6px 10px", borderRadius: "6px", border: "none", backgroundColor: "#4CAF50", color: "white", fontWeight: "500", cursor: "pointer", fontSize: "12px", whiteSpace: "nowrap" },
-  actionBtn: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #0477BF", backgroundColor: "transparent", color: "#0477BF", fontWeight: "500", cursor: "pointer", fontSize: "12px", whiteSpace: "nowrap" },
-  dangerBtn: { padding: "6px 10px", borderRadius: "6px", border: "none", backgroundColor: "#f44336", color: "white", fontWeight: "500", cursor: "pointer", fontSize: "12px", whiteSpace: "nowrap" },
-  select: { width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", backgroundColor: "white", cursor: "pointer" },
+  container: { padding: "clamp(10px, 2vw, 20px) 0" },
+  headerRow: { 
+    display: "flex", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: "clamp(15px, 3vw, 20px)",
+    flexWrap: "wrap",
+    gap: "10px",
+  },
+  mainHeader: { 
+    fontSize: "clamp(20px, 4vw, 28px)", 
+    fontWeight: "bold", 
+    margin: 0, 
+    color: "#2e236c" 
+  },
+  primaryBtn: { 
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px)", 
+    borderRadius: "8px", 
+    border: "none", 
+    backgroundColor: "#0477BF", 
+    color: "white", 
+    fontWeight: "600", 
+    cursor: "pointer",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+  },
+  aiBtn: { 
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px)", 
+    borderRadius: "8px", 
+    border: "none", 
+    backgroundColor: "#6a5acd", 
+    color: "white", 
+    fontWeight: "600", 
+    cursor: "pointer",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+  },
+  secondaryBtn: { 
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px)", 
+    borderRadius: "8px", 
+    border: "1px solid #ddd", 
+    backgroundColor: "white", 
+    color: "#666", 
+    fontWeight: "600", 
+    cursor: "pointer",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+  },
+  formCard: { 
+    background: "white", 
+    borderRadius: "12px", 
+    padding: "clamp(15px, 3vw, 20px)", 
+    marginBottom: "clamp(15px, 3vw, 20px)", 
+    boxShadow: "0 2px 8px rgba(0,0,0,0.08)" 
+  },
+  formGrid: { 
+    display: "grid", 
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", 
+    gap: "clamp(10px, 2vw, 12px)", 
+    marginBottom: "clamp(10px, 2vw, 12px)" 
+  },
+  input: { 
+    padding: "clamp(10px, 2vw, 12px)", 
+    borderRadius: "8px", 
+    border: "1px solid #ddd", 
+    fontSize: "clamp(14px, 2.5vw, 16px)",
+    minHeight: "44px",
+  },
+  textarea: { 
+    width: "100%", 
+    padding: "clamp(10px, 2vw, 12px)", 
+    borderRadius: "8px", 
+    border: "1px solid #ddd", 
+    fontSize: "clamp(14px, 2.5vw, 16px)", 
+    resize: "vertical",
+    minHeight: "100px",
+  },
+  formActions: { 
+    display: "flex", 
+    gap: "clamp(8px, 1.5vw, 10px)", 
+    marginTop: "clamp(10px, 2vw, 15px)",
+    flexWrap: "wrap",
+  },
+  tableContainer: { 
+    overflowX: "auto", 
+    background: "white", 
+    borderRadius: "12px", 
+    padding: "0", 
+    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    WebkitOverflowScrolling: "touch",
+  },
+  table: { 
+    width: "100%", 
+    borderCollapse: "separate", 
+    borderSpacing: 0,
+    minWidth: "800px",
+  },
+  loading: { 
+    textAlign: "center", 
+    padding: "clamp(20px, 4vw, 40px)", 
+    color: "#666",
+    fontSize: "clamp(14px, 3vw, 16px)",
+  },
+  noData: { 
+    textAlign: "center", 
+    padding: "clamp(15px, 3vw, 20px)", 
+    color: "#999",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+  },
+  publishBtn: { 
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)", 
+    borderRadius: "6px", 
+    border: "none", 
+    backgroundColor: "#4CAF50", 
+    color: "white", 
+    fontWeight: "500", 
+    cursor: "pointer", 
+    fontSize: "clamp(11px, 2vw, 12px)", 
+    whiteSpace: "nowrap",
+    minHeight: "36px",
+  },
+  actionBtn: { 
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)", 
+    borderRadius: "6px", 
+    border: "1px solid #0477BF", 
+    backgroundColor: "transparent", 
+    color: "#0477BF", 
+    fontWeight: "500", 
+    cursor: "pointer", 
+    fontSize: "clamp(11px, 2vw, 12px)", 
+    whiteSpace: "nowrap",
+    minHeight: "36px",
+  },
+  dangerBtn: { 
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)", 
+    borderRadius: "6px", 
+    border: "none", 
+    backgroundColor: "#f44336", 
+    color: "white", 
+    fontWeight: "500", 
+    cursor: "pointer", 
+    fontSize: "clamp(11px, 2vw, 12px)", 
+    whiteSpace: "nowrap",
+    minHeight: "36px",
+  },
+  select: { 
+    width: "100%", 
+    padding: "clamp(10px, 2vw, 12px)", 
+    borderRadius: "8px", 
+    border: "1px solid #ddd", 
+    fontSize: "clamp(14px, 2.5vw, 16px)", 
+    backgroundColor: "white", 
+    cursor: "pointer",
+    minHeight: "44px",
+  },
   row: { transition: "background 0.15s", borderBottom: "1px solid #f0f0f0" },
   headerRowStrip: { background: "#f8f9fb" },
-  th: { textAlign: 'left', padding: '14px 16px', fontSize: 14, color: '#2e236c' },
-  td: { verticalAlign: 'top', padding: '14px 16px', fontSize: 14, color: '#333' },
-  cellTitle: { fontWeight: 600, color: "#2e236c" },
-  cellSub: { fontSize: 12, color: "#777", marginTop: 4 },
-  badge: { background: "#eef2ff", color: "#3347b0", padding: "4px 10px", borderRadius: 14, fontSize: 12, fontWeight: 600 },
-  pill: { background: "#e8f5e9", color: "#2e7d32", padding: "4px 10px", borderRadius: 14, fontSize: 12, fontWeight: 600 },
-  actionsCell: { display: 'flex', gap: 6, justifyContent: 'flex-end', alignItems: 'center', whiteSpace: 'nowrap' },
-  modalOverlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 },
-  modalCard: { background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 10px 30px rgba(0,0,0,0.2)', width: 420 },
+  th: { 
+    textAlign: 'left', 
+    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)', 
+    fontSize: "clamp(12px, 2.5vw, 14px)", 
+    color: '#2e236c' 
+  },
+  td: { 
+    verticalAlign: 'top', 
+    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)', 
+    fontSize: "clamp(12px, 2.5vw, 14px)", 
+    color: '#333' 
+  },
+  cellTitle: { fontWeight: 600, color: "#2e236c", fontSize: "clamp(12px, 2.5vw, 14px)" },
+  cellSub: { fontSize: "clamp(10px, 2vw, 12px)", color: "#777", marginTop: 4 },
+  badge: { 
+    background: "#eef2ff", 
+    color: "#3347b0", 
+    padding: "clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 10px)", 
+    borderRadius: 14, 
+    fontSize: "clamp(10px, 2vw, 12px)", 
+    fontWeight: 600 
+  },
+  pill: { 
+    background: "#e8f5e9", 
+    color: "#2e7d32", 
+    padding: "clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 10px)", 
+    borderRadius: 14, 
+    fontSize: "clamp(10px, 2vw, 12px)", 
+    fontWeight: 600 
+  },
+  actionsCell: { 
+    display: 'flex', 
+    gap: "clamp(4px, 1vw, 6px)", 
+    justifyContent: 'flex-end', 
+    alignItems: 'center', 
+    whiteSpace: 'nowrap',
+    flexWrap: "wrap",
+  },
+  modalOverlay: { 
+    position: 'fixed', 
+    inset: 0, 
+    background: 'rgba(0,0,0,0.35)', 
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    zIndex: 1000,
+    padding: "10px",
+  },
+  modalCard: { 
+    background: 'white', 
+    padding: "clamp(15px, 3vw, 20px)", 
+    borderRadius: 12, 
+    boxShadow: '0 10px 30px rgba(0,0,0,0.2)', 
+    width: "100%",
+    maxWidth: "420px",
+    maxHeight: "90vh",
+    overflowY: "auto",
+  },
   previewCard: { marginTop: 16, border: '1px solid #e6eefb', borderRadius: 12, overflow: 'hidden' },
   previewHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fbff', padding: '12px 16px' },
   jobTitle: { fontWeight: 700, fontSize: 16, color: '#2e236c' },

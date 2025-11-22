@@ -130,8 +130,8 @@ const CandidateManagementPage = () => {
         {loading ? (
           <div style={styles.loading}>{language === 'de' ? 'Kandidaten werden geladen...' : 'Loading candidates...'}</div>
         ) : (
-          <div style={styles.tableContainer}>
-            <table style={styles.table}>
+          <div style={styles.tableContainer} className="candidate-table-container">
+            <table style={styles.table} className="candidate-table">
               <thead>
                 <tr>
                   <th style={styles.th}>{t(language, 'candidates.name')}</th>
@@ -193,60 +193,64 @@ const CandidateManagementPage = () => {
 
 const styles = {
   container: {
-    padding: "20px 0",
+    padding: "clamp(10px, 2vw, 20px) 0",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "30px",
+    marginBottom: "clamp(15px, 3vw, 30px)",
+    flexWrap: "wrap",
+    gap: "10px",
   },
   mainHeader: { 
-    fontSize: "28px", 
+    fontSize: "clamp(20px, 4vw, 28px)", 
     fontWeight: "bold",
     margin: 0,
     color: "#2e236c",
   },
   candidateCount: {
-    fontSize: "16px",
+    fontSize: "clamp(12px, 2.5vw, 16px)",
     color: "#666",
     fontWeight: 500,
   },
   filterBar: {
     background: "white",
     borderRadius: "12px",
-    padding: "20px",
-    marginBottom: "25px",
+    padding: "clamp(15px, 3vw, 20px)",
+    marginBottom: "clamp(15px, 3vw, 25px)",
     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
   },
   searchGroup: {
     display: "flex",
-    gap: "12px",
+    gap: "clamp(8px, 1.5vw, 12px)",
     flexWrap: "wrap",
   },
   searchInput: { 
-    flex: "1 1 300px",
-    padding: "12px 16px", 
+    flex: "1 1 200px",
+    padding: "clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px)", 
     borderRadius: "8px", 
     border: "1px solid #ddd", 
-    fontSize: "14px",
+    fontSize: "clamp(14px, 2.5vw, 16px)",
     transition: "all 0.2s",
+    minHeight: "44px",
   },
   searchInputFocus: {
     borderColor: "#0477BF",
     outline: "none",
   },
   statusSelect: {
-    padding: "12px 16px",
+    padding: "clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px)",
     borderRadius: "8px",
     border: "1px solid #ddd",
-    fontSize: "14px",
+    fontSize: "clamp(14px, 2.5vw, 16px)",
     backgroundColor: "white",
     cursor: "pointer",
-    minWidth: "140px",
+    minWidth: "120px",
+    minHeight: "44px",
   },
   searchBtn: { 
-    padding: "12px 24px", 
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 24px)", 
     borderRadius: "8px", 
     border: "none", 
     backgroundColor: "#0477BF", 
@@ -254,10 +258,12 @@ const styles = {
     fontWeight: "600", 
     cursor: "pointer", 
     transition: "all 0.15s ease",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    whiteSpace: "nowrap",
   },
   clearBtn: {
-    padding: "12px 24px",
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 24px)",
     borderRadius: "8px",
     border: "1px solid #ddd",
     backgroundColor: "white",
@@ -265,12 +271,14 @@ const styles = {
     fontWeight: "600",
     cursor: "pointer",
     transition: "all 0.15s ease",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    whiteSpace: "nowrap",
   },
   loading: {
     textAlign: "center",
-    padding: "40px",
-    fontSize: "16px",
+    padding: "clamp(20px, 4vw, 40px)",
+    fontSize: "clamp(14px, 3vw, 16px)",
     color: "#666",
   },
   tableContainer: { 
@@ -278,28 +286,31 @@ const styles = {
     background: "white", 
     borderRadius: "12px", 
     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    WebkitOverflowScrolling: "touch",
   },
   table: { 
     width: "100%", 
     borderCollapse: "separate",
     borderSpacing: 0,
+    minWidth: "600px",
   },
   th: {
-    padding: "16px",
+    padding: "clamp(10px, 2vw, 16px)",
     textAlign: "left",
     fontWeight: "600",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
     color: "#2e236c",
     borderBottom: "2px solid #e0e0e0",
     backgroundColor: "#f8f9fa",
+    whiteSpace: "nowrap",
   },
   tr: {
     transition: "background-color 0.15s",
   },
   td: { 
-    padding: "16px", 
+    padding: "clamp(10px, 2vw, 16px)", 
     borderBottom: "1px solid #f0f0f0",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
   },
   noData: {
     textAlign: "center",
@@ -344,12 +355,13 @@ const styles = {
   },
   actionGroup: {
     display: "flex",
-    gap: "8px",
+    gap: "clamp(6px, 1vw, 8px)",
     alignItems: "center",
     justifyContent: "flex-end",
+    flexWrap: "wrap",
   },
   viewBtn: { 
-    padding: "6px 12px", 
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)", 
     borderRadius: "6px", 
     border: "none", 
     backgroundColor: "#0477BF", 
@@ -357,10 +369,12 @@ const styles = {
     fontWeight: "500", 
     cursor: "pointer", 
     transition: "all 0.15s ease",
-    fontSize: "13px",
+    fontSize: "clamp(11px, 2vw, 13px)",
+    minHeight: "36px",
+    whiteSpace: "nowrap",
   },
   editBtn: {
-    padding: "6px 10px",
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)",
     borderRadius: "6px",
     border: "1px solid #0477BF",
     backgroundColor: "transparent",
@@ -368,16 +382,21 @@ const styles = {
     fontWeight: "500",
     cursor: "pointer",
     transition: "all 0.15s ease",
-    fontSize: "13px",
+    fontSize: "clamp(11px, 2vw, 13px)",
+    minHeight: "36px",
+    whiteSpace: "nowrap",
   },
   deleteBtn: {
-    padding: "6px 10px",
+    padding: "clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 12px)",
     borderRadius: "6px",
     border: "none",
     backgroundColor: "#f44336",
     color: "white",
     cursor: "pointer",
     transition: "all 0.15s ease",
+    fontSize: "clamp(11px, 2vw, 13px)",
+    minHeight: "36px",
+    whiteSpace: "nowrap",
   },
   applicationBadge: {
     padding: "4px 12px",

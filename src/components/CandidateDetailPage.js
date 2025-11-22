@@ -107,7 +107,7 @@ const CandidateDetailPage = () => {
           {applications.length === 0 ? (
             <p style={styles.noData}>{language === 'de' ? 'Keine Bewerbungen gefunden' : 'No applications found'}</p>
           ) : (
-            <div style={styles.appsLayout}>
+            <div style={styles.appsLayout} className="candidate-apps-layout">
               <div style={styles.appsList}>
                 <table style={styles.table}>
                   <thead>
@@ -226,36 +226,92 @@ const CandidateDetailPage = () => {
 };
 
 const styles = {
-  container: { padding: "20px 0" },
-  header: { display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "30px", gap: "20px" },
-  mainHeader: { fontSize: "28px", fontWeight: "bold", margin: 0, color: "#2e236c" },
+  container: { padding: "clamp(10px, 2vw, 20px) 0" },
+  header: { 
+    display: "flex", 
+    justifyContent: "flex-start", 
+    alignItems: "center", 
+    marginBottom: "clamp(15px, 3vw, 30px)", 
+    gap: "clamp(10px, 2vw, 20px)",
+    flexWrap: "wrap",
+  },
+  mainHeader: { 
+    fontSize: "clamp(20px, 4vw, 28px)", 
+    fontWeight: "bold", 
+    margin: 0, 
+    color: "#2e236c" 
+  },
   backBtn: {
-    padding: "8px 16px",
+    padding: "clamp(8px, 1.5vw, 10px) clamp(12px, 2.5vw, 16px)",
     borderRadius: "8px",
     border: "1px solid #ddd",
     backgroundColor: "white",
     color: "#666",
     fontWeight: "500",
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
   },
-  headerButtons: { display: "flex", gap: "15px", marginBottom: "30px" },
-  actionBtn: { padding: "10px 20px", borderRadius: "8px", border: "none", backgroundColor: "#0477BF", color: "white", fontWeight: "bold", cursor: "pointer", transition: "all 0.15s ease" },
-  section: { background: "white", padding: "25px", borderRadius: "12px", marginBottom: "20px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" },
-  sectionTitle: { fontSize: "18px", fontWeight: "600", marginBottom: "20px", color: "#2e236c" },
+  headerButtons: { 
+    display: "flex", 
+    gap: "clamp(10px, 2vw, 15px)", 
+    marginBottom: "clamp(15px, 3vw, 30px)",
+    flexWrap: "wrap",
+  },
+  actionBtn: { 
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px)", 
+    borderRadius: "8px", 
+    border: "none", 
+    backgroundColor: "#0477BF", 
+    color: "white", 
+    fontWeight: "bold", 
+    cursor: "pointer", 
+    transition: "all 0.15s ease",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+  },
+  section: { 
+    background: "white", 
+    padding: "clamp(15px, 3vw, 25px)", 
+    borderRadius: "12px", 
+    marginBottom: "clamp(15px, 3vw, 20px)", 
+    boxShadow: "0 2px 8px rgba(0,0,0,0.08)" 
+  },
+  sectionTitle: { 
+    fontSize: "clamp(16px, 3vw, 18px)", 
+    fontWeight: "600", 
+    marginBottom: "clamp(15px, 3vw, 20px)", 
+    color: "#2e236c" 
+  },
   infoGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "15px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: "clamp(10px, 2vw, 15px)",
   },
-  label: { display: "block", fontSize: "13px", fontWeight: "600", color: "#666", marginBottom: "4px" },
-  value: { display: "block", fontSize: "15px", color: "#2e236c", fontWeight: "500" },
-  table: { width: "100%", borderCollapse: "collapse" },
+  label: { 
+    display: "block", 
+    fontSize: "clamp(11px, 2vw, 13px)", 
+    fontWeight: "600", 
+    color: "#666", 
+    marginBottom: "4px" 
+  },
+  value: { 
+    display: "block", 
+    fontSize: "clamp(13px, 2.5vw, 15px)", 
+    color: "#2e236c", 
+    fontWeight: "500" 
+  },
+  table: { 
+    width: "100%", 
+    borderCollapse: "collapse",
+    overflowX: "auto",
+    display: "block",
+  },
   th: {
-    padding: "12px 16px",
+    padding: "clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px)",
     textAlign: "left",
     fontWeight: "600",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
     color: "#2e236c",
     borderBottom: "2px solid #e0e0e0",
     backgroundColor: "#f8f9fa",
@@ -264,11 +320,15 @@ const styles = {
     transition: "background-color 0.15s",
   },
   td: {
-    padding: "12px 16px",
+    padding: "clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px)",
     borderBottom: "1px solid #f0f0f0",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
   },
-  appsLayout: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" },
+  appsLayout: { 
+    display: "grid", 
+    gridTemplateColumns: "1fr",
+    gap: "clamp(15px, 3vw, 20px)",
+  },
   appsList: { overflowX: "auto" },
   appDetail: { background: "#f9fbff", padding: "20px", borderRadius: "8px", border: "1px solid #e6eefb" },
   detailSection: { marginBottom: "25px" },

@@ -121,7 +121,7 @@ const ClientsPage = () => {
               <div style={styles.formRow}>
                         <input type="text" name="contact_person" placeholder={t(language, 'clients.contactPerson')} value={formData.contact_person} onChange={handleInputChange} style={styles.input} />
               </div>
-              <div style={styles.formActions}>
+              <div style={styles.formActions} className="responsive-form-actions">
                 <button type="submit" style={styles.submitBtn}>
                           {editing ? (language === 'de' ? 'Änderungen speichern' : 'Save Changes') : t(language, 'clients.addClient')}
                 </button>
@@ -136,8 +136,8 @@ const ClientsPage = () => {
         {/* removed old search bar */}
 
         {/* Clients Table */}
-                <div style={styles.tableContainer}>
-                  <table style={styles.table}>
+                <div style={styles.tableContainer} className="clients-table-container">
+                  <table style={styles.table} className="clients-table">
                     <thead>
                       <tr style={styles.headerRowStrip}>
                         <th style={{...styles.th, width: '32%'}}>{t(language, 'clients.company')}</th>
@@ -183,15 +183,47 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px"
+    marginBottom: "clamp(15px, 3vw, 20px)",
+    flexWrap: "wrap",
+    gap: "10px",
   },
-  searchRow: { display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' },
-  searchGroup: { display: 'flex', gap: '10px', width: '50%', minWidth: 360 },
-  searchInput: { flex: 1, padding: '10px 12px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '14px' },
-  searchBtn: { padding: '10px 16px', borderRadius: '8px', border: 'none', background: '#0477BF', color: '#fff', fontWeight: 600, cursor: 'pointer' },
-  mainHeader: { fontSize: "24px", fontWeight: "bold" },
+  searchRow: { 
+    display: 'flex', 
+    justifyContent: 'flex-end', 
+    marginBottom: 'clamp(10px, 2vw, 12px)',
+  },
+  searchGroup: { 
+    display: 'flex', 
+    gap: 'clamp(8px, 1.5vw, 10px)', 
+    width: '100%',
+    maxWidth: '100%',
+  },
+  searchInput: { 
+    flex: 1, 
+    padding: 'clamp(10px, 2vw, 12px)', 
+    borderRadius: '8px', 
+    border: '1px solid #ddd', 
+    fontSize: 'clamp(14px, 2.5vw, 16px)',
+    minHeight: "44px",
+  },
+  searchBtn: { 
+    padding: 'clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px)', 
+    borderRadius: '8px', 
+    border: 'none', 
+    background: '#0477BF', 
+    color: '#fff', 
+    fontWeight: 600, 
+    cursor: 'pointer',
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    whiteSpace: "nowrap",
+  },
+  mainHeader: { 
+    fontSize: "clamp(20px, 4vw, 24px)", 
+    fontWeight: "bold" 
+  },
   addBtn: {
-    padding: "10px 20px",
+    padding: "clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px)",
     borderRadius: "8px",
     border: "none",
     backgroundColor: "#0477BF",
@@ -199,66 +231,95 @@ const styles = {
     fontWeight: "bold",
     cursor: "pointer",
     transition: "all 0.15s ease",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    whiteSpace: "nowrap",
   },
   formContainer: {
     background: "white",
-    padding: "25px",
+    padding: "clamp(15px, 3vw, 25px)",
     borderRadius: "12px",
-    marginBottom: "30px",
+    marginBottom: "clamp(15px, 3vw, 30px)",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
   },
   formHeader: {
-    fontSize: "20px",
+    fontSize: "clamp(18px, 3.5vw, 20px)",
     fontWeight: "bold",
-    marginBottom: "20px",
+    marginBottom: "clamp(15px, 3vw, 20px)",
   },
   formRow: {
     display: "flex",
-    gap: "15px",
-    marginBottom: "15px",
+    gap: "clamp(10px, 2vw, 15px)",
+    marginBottom: "clamp(10px, 2vw, 15px)",
+    flexWrap: "wrap",
   },
   input: {
-    flex: 1,
-    padding: "10px 15px",
+    flex: "1 1 200px",
+    padding: "clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 15px)",
     borderRadius: "8px",
     border: "1px solid #ccc",
-    fontSize: "16px",
+    fontSize: "clamp(14px, 2.5vw, 16px)",
+    minHeight: "44px",
   },
   formActions: {
     display: "flex",
-    gap: "15px",
-    marginTop: "20px",
+    gap: "clamp(10px, 2vw, 15px)",
+    marginTop: "clamp(15px, 3vw, 20px)",
+    flexWrap: "wrap",
   },
   submitBtn: {
-    padding: "10px 25px",
+    padding: "clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px)",
     borderRadius: "8px",
     border: "none",
     backgroundColor: "#0477BF",
     color: "white",
     fontWeight: "bold",
     cursor: "pointer",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    flex: "1 1 150px",
   },
   cancelBtn: {
-    padding: "10px 25px",
+    padding: "clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px)",
     borderRadius: "8px",
     border: "1px solid #ccc",
     backgroundColor: "white",
     color: "#666",
     fontWeight: "bold",
     cursor: "pointer",
+    fontSize: "clamp(12px, 2.5vw, 14px)",
+    minHeight: "44px",
+    flex: "1 1 150px",
   },
   
   tableContainer: {
     overflowX: "auto",
     background: "white",
     borderRadius: "12px",
-    padding: "20px",
+    padding: "clamp(15px, 3vw, 20px)",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    WebkitOverflowScrolling: "touch",
   },
-  table: { width: "100%", borderCollapse: "separate", borderSpacing: 0, fontSize: "16px" },
+  table: { 
+    width: "100%", 
+    borderCollapse: "separate", 
+    borderSpacing: 0, 
+    fontSize: "clamp(14px, 2.5vw, 16px)",
+    minWidth: "600px",
+  },
   headerRowStrip: { background: "#f8f9fb" },
-  th: { textAlign: 'left', padding: '14px 16px', fontSize: 14, color: '#2e236c' },
-  td: { padding: '14px 16px', fontSize: 14, color: '#333', verticalAlign: 'middle' },
+  th: { 
+    textAlign: 'left', 
+    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)', 
+    fontSize: "clamp(12px, 2.5vw, 14px)", 
+    color: '#2e236c' 
+  },
+  td: { 
+    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)', 
+    fontSize: "clamp(12px, 2.5vw, 14px)", 
+    color: '#333', 
+    verticalAlign: 'middle' 
+  },
   statusBadge: {
     padding: "5px 12px",
     borderRadius: "15px",

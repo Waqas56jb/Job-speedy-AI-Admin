@@ -1,0 +1,165 @@
+/* Responsive Styles for All Components */
+
+/* Dashboard Graphs - 2 columns on larger screens */
+@media (min-width: 768px) {
+  .dashboard-graphs {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Candidate Management - Responsive Table */
+@media (max-width: 768px) {
+  .candidate-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .candidate-table {
+    min-width: 600px;
+  }
+  
+  .candidate-table th,
+  .candidate-table td {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Job Management - Responsive Table */
+@media (max-width: 768px) {
+  .job-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .job-table {
+    min-width: 800px;
+  }
+  
+  .job-table th,
+  .job-table td {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Clients Table - Responsive */
+@media (max-width: 768px) {
+  .clients-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .clients-table {
+    min-width: 600px;
+  }
+  
+  .clients-table th,
+  .clients-table td {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Forms - Responsive */
+@media (max-width: 768px) {
+  .responsive-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .responsive-form-actions {
+    flex-direction: column !important;
+  }
+  
+  .responsive-form-actions button {
+    width: 100% !important;
+  }
+}
+
+/* Modals - Responsive */
+@media (max-width: 768px) {
+  .responsive-modal {
+    width: 95% !important;
+    max-width: 95% !important;
+    padding: 20px !important;
+    margin: 10px !important;
+  }
+}
+
+/* Buttons - Touch Friendly */
+@media (max-width: 768px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Inputs - Touch Friendly */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+}
+
+/* Candidate Detail - Responsive Layout */
+@media (max-width: 768px) {
+  .candidate-apps-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .candidate-apps-layout {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* AI Tools - Responsive Cards */
+@media (max-width: 768px) {
+  .ai-tools-module-card {
+    padding: 15px !important;
+  }
+}
+
+/* Login/Register - Responsive */
+@media (max-width: 768px) {
+  .login-page,
+  .register-page {
+    flex-direction: column !important;
+  }
+  
+  .login-left-section,
+  .register-left-section {
+    min-height: 200px !important;
+    padding: 20px !important;
+  }
+  
+  .login-right-section,
+  .register-right-section {
+    padding: 20px !important;
+  }
+  
+  .login-form-box,
+  .register-form-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+  }
+}
+
+/* General - Prevent horizontal scroll */
+* {
+  max-width: 100%;
+}
+
+/* Ensure tables are scrollable on mobile */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+

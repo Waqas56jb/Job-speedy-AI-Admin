@@ -8,6 +8,7 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { language, toggleLanguage } = useLanguage();
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
   
   const getSidebarItems = () => [
     { label: t(language, 'sidebar.dashboard'), key: "dashboard" },
@@ -99,6 +100,15 @@ const Layout = ({ children }) => {
     <div style={styles.page}>
       {/* Top Section with Logo and Navbar */}
       <div style={styles.topSection}>
+        {/* Mobile Menu Button */}
+        <button 
+          style={styles.menuButton}
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Toggle menu"
+        >
+          {sidebarOpen ? '✕' : '☰'}
+        </button>
+        
         {/* Logo */}
         <div style={styles.logo}>
           <div style={styles.logoText}>JOBspeedy AI</div>
@@ -121,11 +131,22 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </div>
+      
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          style={styles.overlay}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar + Main */}
       <div style={styles.contentWrapper}>
         {/* Sidebar */}
-        <div style={styles.sidebar}>
+        <div style={{
+          ...styles.sidebar,
+          ...(sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed)
+        }}>
           {getSidebarItems().map((item) => {
             const routes = {
               "dashboard": "/dashboard",
@@ -139,7 +160,10 @@ const Layout = ({ children }) => {
               <div
                 key={item.key}
                 style={getSidebarItemStyle(item)}
-                onClick={() => handleNavigate(item.key)}
+                onClick={() => {
+                  handleNavigate(item.key);
+                  setSidebarOpen(false);
+                }}
                 onMouseOver={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.background =
@@ -166,7 +190,10 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Main Content */}
-        <div style={styles.main}>
+        <div style={{
+          ...styles.main,
+          ...(sidebarOpen ? styles.mainWithSidebarOpen : {})
+        }}>
           {children}
         </div>
       </div>
@@ -199,17 +226,29 @@ const styles = {
     zIndex: 1000,
     height: "80px",
   },
+  menuButton: {
+    display: "none",
+    background: "transparent",
+    border: "none",
+    fontSize: "24px",
+    cursor: "pointer",
+    padding: "10px 15px",
+    color: "#2e236c",
+    minWidth: "44px",
+    minHeight: "44px",
+  },
   logo: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "0px 40px",
-    minWidth: "280px",
+    padding: "0px 20px",
+    minWidth: "200px",
     height: "100%",
+    flex: "0 0 auto",
   },
   logoText: {
     fontFamily: "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    fontSize: "32px",
+    fontSize: "clamp(20px, 4vw, 32px)",
     fontWeight: "600",
     background: "linear-gradient(135deg, #00B2FF 0%, #0083FF 100%)",
     WebkitBackgroundClip: "text",
@@ -222,31 +261,51 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    padding: "15px 40px",
+    padding: "15px 20px",
     flex: 1,
     height: "100%",
+    gap: "10px",
   },
-  topRight: { display: "flex", alignItems: "center", gap: "15px" },
-  topBarItem: { fontWeight: 500, color: "#2e236c" },
+  topRight: { 
+    display: "flex", 
+    alignItems: "center", 
+    gap: "10px",
+    flexWrap: "wrap",
+  },
+  topBarItem: { 
+    fontWeight: 500, 
+    color: "#2e236c",
+    fontSize: "clamp(12px, 2vw, 14px)",
+    display: "none",
+  },
   languageBtn: {
     background: "transparent",
     color: "#2e236c",
     border: "1px solid #ddd",
     borderRadius: "25px",
-    padding: "8px 16px",
+    padding: "8px 12px",
     cursor: "pointer",
     transition: "all 0.15s ease",
     fontWeight: 500,
-    fontSize: "14px",
+    fontSize: "clamp(12px, 2vw, 14px)",
+    minWidth: "44px",
+    minHeight: "44px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   logoutBtn: {
     background: "#0477BF",
     color: "#fff",
     border: "none",
     borderRadius: "25px",
-    padding: "8px 20px",
+    padding: "8px 16px",
     cursor: "pointer",
     transition: "all 0.15s ease",
+    fontSize: "clamp(12px, 2vw, 14px)",
+    minWidth: "44px",
+    minHeight: "44px",
+    whiteSpace: "nowrap",
   },
   contentWrapper: { 
     display: "flex", 
@@ -267,25 +326,48 @@ const styles = {
     height: "calc(100vh - 80px)",
     overflowY: "auto",
     boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
+    transition: "transform 0.3s ease",
+    zIndex: 999,
+  },
+  sidebarOpen: {
+    transform: "translateX(0)",
+  },
+  sidebarClosed: {
+    transform: "translateX(-100%)",
   },
   sidebarItem: {
     cursor: "pointer",
     color: "#555",
     fontWeight: "bold",
-    fontSize: "16px",
+    fontSize: "clamp(14px, 2vw, 16px)",
     textAlign: "left",
     padding: "12px 12px",
     borderRadius: "8px",
     transition: "all 0.3s ease",
     display: "flex",
     alignItems: "center",
+    minHeight: "44px",
   },
   main: { 
     flex: 1, 
-    padding: "40px",
+    padding: "clamp(15px, 3vw, 40px)",
     marginLeft: "220px",
     overflowY: "auto",
     minHeight: "calc(100vh - 80px)",
+    width: "100%",
+    maxWidth: "100%",
+  },
+  mainWithSidebarOpen: {
+    marginLeft: "0",
+  },
+  overlay: {
+    position: "fixed",
+    top: "80px",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 998,
   },
   waveContainer: {
     position: "fixed",
@@ -298,5 +380,78 @@ const styles = {
   },
   wave: { width: "100%", height: "auto", display: "block" },
 };
+
+// Media query styles
+const mediaQueries = `
+  @media (min-width: 768px) {
+    .menuButton {
+      display: none !important;
+    }
+    .topBarItem {
+      display: inline !important;
+    }
+    .sidebar {
+      transform: translateX(0) !important;
+    }
+    .main {
+      margin-left: 220px !important;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .menuButton {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo {
+      padding: 0px 10px !important;
+      min-width: auto !important;
+      flex: 1 !important;
+    }
+    .topNavbar {
+      padding: 15px 10px !important;
+    }
+    .topRight {
+      gap: 8px !important;
+    }
+    .main {
+      margin-left: 0 !important;
+      padding: 15px !important;
+    }
+    .sidebar {
+      width: 260px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logoText {
+      font-size: 18px !important;
+    }
+    .topSection {
+      height: 70px !important;
+    }
+    .contentWrapper {
+      margin-top: 70px !important;
+    }
+    .sidebar {
+      top: 70px !important;
+      height: calc(100vh - 70px) !important;
+      width: 100% !important;
+      max-width: 280px !important;
+    }
+    .main {
+      padding: 10px !important;
+    }
+  }
+`;
+
+// Inject media queries
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = mediaQueries;
+  document.head.appendChild(styleSheet);
+}
 
 export default Layout;
