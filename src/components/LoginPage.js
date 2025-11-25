@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import backgroundImg from "../assets/background.png";
 import waveImg from "../assets/wave.png";
+import brandLogo from "../assets/Jobspeedy_gemini.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { t } from "../utils/i18n";
@@ -121,7 +122,7 @@ const LoginPage = () => {
 
       {/* Left Side */}
       <div style={styles.leftSection} className="login-left-section">
-        <div style={styles.logoText}>JOBspeedy AI</div>
+        <img src={brandLogo} alt="JOBspeedy AI" style={styles.logoImg} />
         <p style={styles.quote}>
           {t(language, 'login.quote')}
         </p>
@@ -340,17 +341,12 @@ const styles = {
     textAlign: "center",
     padding: "40px",
   },
-  logoText: {
-    fontFamily: "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    fontSize: "48px",
-    fontWeight: "600",
-    background: "linear-gradient(135deg, #00B2FF 0%, #0083FF 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    letterSpacing: "-0.5px",
-    lineHeight: "1.2",
+  logoImg: {
+    width: "100%",
+    maxWidth: "320px",
+    height: "auto",
     marginBottom: "20px",
+    objectFit: "contain",
   },
   quote: {
     fontSize: "16px",

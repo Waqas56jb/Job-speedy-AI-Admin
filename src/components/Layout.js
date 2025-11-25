@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import waveImg from "../assets/wave.png";
+import brandLogo from "../assets/Jobspeedy_gemini.png";
 import { useLanguage } from "../contexts/LanguageContext";
 import { t } from "../utils/i18n";
 
@@ -127,7 +128,12 @@ const Layout = ({ children }) => {
         
         {/* Logo */}
         <div style={styles.logo} data-logo>
-          <div style={styles.logoText} data-logo-text>JOBspeedy AI</div>
+          <img
+            src={brandLogo}
+            alt="JOBspeedy AI"
+            style={styles.logoImage}
+            data-logo-text
+          />
         </div>
         
         {/* Top Navbar */}
@@ -279,7 +285,7 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 1000,
-    height: "80px",
+    height: "150px",
   },
   menuButton: {
     display: "flex",
@@ -306,19 +312,10 @@ const styles = {
     overflow: "hidden",
     flexShrink: 1,
   },
-  logoText: {
-    fontFamily: "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    fontSize: "clamp(16px, 3vw, 32px)",
-    fontWeight: "600",
-    background: "linear-gradient(135deg, #00B2FF 0%, #0083FF 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    letterSpacing: "-0.5px",
-    lineHeight: "1.2",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
+  logoImage: {
+    height: "150px",
+    width: "auto",
+    objectFit: "contain",
     maxWidth: "100%",
   },
   topNavbar: {
@@ -381,8 +378,8 @@ const styles = {
   },
   contentWrapper: { 
     display: "flex", 
-    marginTop: "80px",
-    minHeight: "calc(100vh - 80px)",
+    marginTop: "150px",
+    minHeight: "calc(100vh - 150px)",
     width: "100%",
     boxSizing: "border-box",
     overflowX: "hidden",
@@ -395,10 +392,10 @@ const styles = {
     flexDirection: "column", 
     gap: "15px", 
     position: "fixed",
-    top: "80px",
+    top: "150px",
     left: 0,
     bottom: 0,
-    height: "calc(100vh - 80px)",
+    height: "calc(100vh - 150px)",
     overflowY: "auto",
     boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
     transition: "transform 0.3s ease",
@@ -436,7 +433,7 @@ const styles = {
     padding: "clamp(15px, 3vw, 40px)",
     marginLeft: "220px",
     overflowY: "auto",
-    minHeight: "calc(100vh - 80px)",
+    minHeight: "calc(100vh - 150px)",
     width: "100%",
     maxWidth: "100%",
     boxSizing: "border-box",
@@ -447,14 +444,14 @@ const styles = {
   },
   overlay: {
     position: "fixed",
-    top: "80px",
+    top: "150px",
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 1000,
     width: "100%",
-    height: "calc(100vh - 80px)",
+    height: "calc(100vh - 150px)",
     pointerEvents: "auto",
     touchAction: "auto",
   },
@@ -503,7 +500,8 @@ const mediaQueries = `
       max-width: calc(100% - 200px) !important;
     }
     [data-logo-text] {
-      font-size: clamp(14px, 3vw, 20px) !important;
+      max-height: 100px !important;
+      height: auto !important;
     }
     [data-top-navbar] {
       padding: 10px 8px !important;
@@ -537,8 +535,8 @@ const mediaQueries = `
   
   @media (max-width: 480px) {
     [data-logo-text] {
-      font-size: 14px !important;
       max-width: 120px !important;
+      max-height: 60px !important;
     }
     [data-logo] {
       padding: 0px 8px !important;
@@ -579,6 +577,10 @@ const mediaQueries = `
     }
     [data-logout-btn] {
       padding: 5px 10px !important;
+    }
+    [data-overlay] {
+      top: 70px !important;
+      height: calc(100vh - 70px) !important;
     }
   }
   
