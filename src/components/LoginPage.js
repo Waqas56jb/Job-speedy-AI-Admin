@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import backgroundImg from "../assets/background.png";
 import waveImg from "../assets/wave.png";
 import brandLogo from "../assets/Jobspeedy_gemini.png";
@@ -20,6 +20,28 @@ const LoginPage = () => {
   const [resetLoading, setResetLoading] = useState(false);
   const [resetError, setResetError] = useState("");
   const [resetSuccess, setResetSuccess] = useState("");
+
+  useEffect(() => {
+    const scriptId = "Cookiebot";
+    if (document.getElementById(scriptId)) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = "https://consent.cookiebot.com/uc.js";
+    script.setAttribute("data-cbid", "71a48449-fe36-45dd-8872-b3491c3dd9da");
+    script.setAttribute("data-blockingmode", "auto");
+    script.type = "text/javascript";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
 
   const handleLogin = async () => {
     setError("");
